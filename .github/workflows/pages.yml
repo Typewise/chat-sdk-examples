@@ -39,7 +39,7 @@ jobs:
           VITE_TW_WORKSPACE_ID: ${{ vars.VITE_TW_WORKSPACE_ID }}
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:
           path: site
