@@ -9,17 +9,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@assistant-ui/react": "0.15.23",
-    "@assistant-ui/react-markdown": "0.14.18",
+    "@assistant-ui/react": "0.15.26",
+    "@assistant-ui/react-markdown": "0.14.20",
     "@typewise/chat-sdk": "^0.1.0",
-    "react": "19.2.5",
-    "react-dom": "19.2.5"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.1",
-    "typescript": "5.9.3",
-    "vite": "8.0.16"
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "typescript": "7.0.2",
+    "vite": "8.3.4"
   }
 }
