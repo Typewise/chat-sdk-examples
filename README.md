@@ -21,7 +21,7 @@ npm install
 npm run dev:storefront   # or dev:sidebar, dev:proactive, dev:script-tag
 ```
 
-Each demo asks for a Typewise client ID on first load, using the "Connect Typewise" pill in the bottom left. Find yours in the Typewise platform under **Channels → Chat → Installation**: it is the `clientId` in the Quick start snippet. You can also pass it in the URL (`?clientId=…&workspaceId=…`), or set it at build time in `.env.local` inside an example:
+Each demo asks for a Typewise client ID on first load, using the "Connect Typewise" pill in the bottom left. Find yours in the Typewise platform under **Behavior → Channels → Chat → Installation**: it is the `clientId` in the Quick start snippet. You can also pass it in the URL (`?clientId=…&workspaceId=…`), or set it at build time in `.env.local` inside an example:
 
 ```sh
 VITE_TW_CLIENT_ID=your-client-id
