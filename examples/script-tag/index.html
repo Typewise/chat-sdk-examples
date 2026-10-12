@@ -132,7 +132,10 @@
       const SETTINGS_KEY = 'tw-chat-sdk-examples:settings';
       const params = new URLSearchParams(location.search);
       const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-      const clientId = params.get('clientId') || saved.clientId;
+      const pick = (key) => params.get(key) || saved[key];
+      const clientId = pick('clientId');
+      const workspaceId = pick('workspaceId');
+      const baseUrl = pick('baseUrl');
 
       const connectForm = document.getElementById('connect');
       connectForm.clientId.value = clientId || '';
@@ -146,8 +149,8 @@
       if (clientId) {
         const chat = Typewise.createClient({
           clientId,
-          ...(saved.workspaceId && { workspaceId: saved.workspaceId }),
-          ...(saved.baseUrl && { baseUrl: saved.baseUrl }),
+          ...(workspaceId && { workspaceId }),
+          ...(baseUrl && { baseUrl }),
         });
         window.chat = chat;
 
