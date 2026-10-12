@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Script tag · Typewise Chat SDK</title>
+    <style>
+      :root {
+        --brand: #3c61e2;
+        --line: #e4e7ec;
+        --muted: #5f6672;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        color: #14161a;
+      }
+      body {
+        max-width: 640px;
+        margin: 48px auto;
+        padding: 0 20px;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 24px;
+      }
+      p.lead {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+      code {
+        font-size: 13px;
+      }
+      #connect,
+      #chat {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      #connect {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      #connect input,
+      #composer input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font: inherit;
+      }
+      button {
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--brand);
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+      #status {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      #messages {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 200px;
+        max-height: 420px;
+        overflow-y: auto;
+        margin: 0 0 12px;
+        padding: 0;
+        list-style: none;
+      }
+      #messages li {
+        max-width: 85%;
+        padding: 8px 12px;
+        border-radius: 12px;
+        background: #f2f4f7;
+        white-space: pre-wrap;
+      }
+      #messages li.user {
+        align-self: flex-end;
+        background: var(--brand);
+        color: #fff;
+      }
+      #messages li.sending {
+        opacity: 0.6;
+      }
+      #messages li.activity {
+        background: none;
+        color: var(--muted);
+        font-style: italic;
+      }
+      #composer {
+        display: flex;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Script tag, no build step</h1>
+    <p class="lead">
+      This page loads <code>typewise.global.js</code> from the Typewise CDN and
+      renders a chat with plain DOM code. View the source: it is one file.
+    </p>
+
+    <form id="connect">
+      <input name="clientId" placeholder="Your Typewise client ID" required />
+      <button type="submit">Connect</button>
+    </form>
+
+    <section id="chat" hidden>
+      <p id="status">Connecting…</p>
+      <ol id="messages" aria-live="polite"></ol>
+      <form id="composer">
+        <input placeholder="Type a message…" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <script src="https://platform.typewise.app/client-sdk/typewise.global.js"></script>
+    <script>
+      // Shared with the other examples on this site, so you only enter it once.
+      const SETTINGS_KEY = 'tw-chat-sdk-examples:settings';
+      const params = new URLSearchParams(location.search);
+      const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      const clientId = params.get('clientId') || saved.clientId;
+
+      const connectForm = document.getElementById('connect');
+      connectForm.clientId.value = clientId || '';
+      connectForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const next = { ...saved, clientId: connectForm.clientId.value.trim() };
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));
+        location.search = '';
+      });
+
+      if (clientId) {
+        const chat = Typewise.createClient({
+          clientId,
+          ...(saved.workspaceId && { workspaceId: saved.workspaceId }),
+          ...(saved.baseUrl && { baseUrl: saved.baseUrl }),
+        });
+        window.chat = chat;
+
+        const section = document.getElementById('chat');
+        const status = document.getElementById('status');
+        const list = document.getElementById('messages');
+        const composer = document.getElementById('composer');
+        section.hidden = false;
+
+        chat.subscribe((state) => {
+          status.textContent = state.conversation?.isHandledByHuman
+            ? 'A team member joined'
+            : `Connection: ${state.connection}`;
+
+          const items = state.messages.map((message) => {
+            const item = document.createElement('li');
+            item.className = `${message.role} ${message.status}`;
+            item.textContent = message.text;
+            return item;
+          });
+          if (state.activity.kind !== 'idle') {
+            const item = document.createElement('li');
+            item.className = 'activity';
+            item.textContent =
+              state.activity.kind === 'agent_typing'
+                ? 'Typing…'
+                : state.activity.kind === 'waiting_for_agent'
+                  ? 'Waiting for a team member…'
+                  : state.activity.text || 'Thinking…';
+            items.push(item);
+          }
+          list.replaceChildren(...items);
+          list.scrollTop = list.scrollHeight;
+        });
+
+        composer.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const input = composer.querySelector('input');
+          const text = input.value.trim();
+          if (!text) return;
+          input.value = '';
+          chat.sendMessage(text).catch(() => undefined);
+        });
+
+        chat.getConfig().catch(() => undefined);
+        chat.resume().catch((error) => console.warn('[typewise]', error));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "chat-sdk-examples",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "examples/storefront-concierge",
+    "examples/sidebar",
+    "examples/proactive-prompts"
+  ],
+  "scripts": {
+    "dev:storefront": "npm run dev -w storefront-concierge",
+    "dev:sidebar": "npm run dev -w sidebar",
+    "dev:proactive": "npm run dev -w proactive-prompts",
+    "dev:script-tag": "npx --yes serve examples/script-tag",
+    "build": "node scripts/build-site.mjs",
+    "preview": "npx --yes serve site",
+    "typecheck": "npm run typecheck --workspaces",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docs · Northwind Analytics</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="#">
+          <span class="brand-mark"></span> Northwind <span>Docs</span>
+        </a>
+        <nav class="topnav">
+          <a href="#">Guides</a>
+          <a href="#">API</a>
+          <a href="#">Changelog</a>
+        </nav>
+        <button class="help-toggle" type="button" aria-expanded="false">
+          <span class="help-toggle-dot"></span> Ask AI
+          <kbd>?</kbd>
+        </button>
+      </header>
+
+      <div class="layout">
+        <aside class="toc" aria-label="On this page">
+          <p class="toc-title">On this page</p>
+          <a href="#getting-started">Getting started</a>
+          <a href="#dashboards">Dashboards</a>
+          <a href="#alerts">Alerts</a>
+          <a href="#billing">Plans and billing</a>
+        </aside>
+
+        <main class="docs">
+          <p class="eyebrow">Guides</p>
+          <h1>Northwind Analytics handbook</h1>
+          <p class="lead">
+            Everything you need to connect your data, build dashboards and get
+            alerted when a metric moves. Open the assistant at any time: it
+            knows which section you are reading.
+          </p>
+
+          <section id="getting-started" data-section="Getting started">
+            <h2>Getting started</h2>
+            <p>
+              Connect a data source from <strong>Settings → Sources</strong>.
+              Northwind supports Postgres, BigQuery, Snowflake and CSV uploads.
+              The first sync usually takes a few minutes; large warehouses can
+              take up to an hour.
+            </p>
+            <p>
+              Invite teammates from <strong>Settings → Members</strong>. Viewers
+              can read dashboards, editors can change them, and admins manage
+              sources and billing.
+            </p>
+            <pre><code>northwind sources add postgres \
+  --host db.internal --database analytics --read-only</code></pre>
+          </section>
+
+          <section id="dashboards" data-section="Dashboards">
+            <h2>Dashboards</h2>
+            <p>
+              A dashboard is a grid of tiles. Each tile runs one saved query and
+              refreshes on its own schedule, from every five minutes to once a
+              day. Drag tiles to rearrange them and resize from the corner.
+            </p>
+            <p>
+              Share a dashboard with a link, embed it in an internal tool with a
+              signed URL, or schedule a PDF snapshot to Slack or email every
+              Monday morning.
+            </p>
+            <ul>
+              <li>Filters apply to every tile that uses the same field.</li>
+              <li>Dashboards keep 90 days of version history.</li>
+              <li>Up to 40 tiles per dashboard on the Team plan.</li>
+            </ul>
+          </section>
+
+          <section id="alerts" data-section="Alerts">
+            <h2>Alerts</h2>
+            <p>
+              Alerts watch a metric and notify you when it crosses a threshold
+              or changes faster than usual. Anomaly alerts learn the normal
+              range from the last 28 days, so give a new metric a few weeks
+              before you rely on them.
+            </p>
+            <p>
+              Route alerts to Slack, Microsoft Teams, PagerDuty or email. Quiet
+              hours pause non-critical alerts outside your team's working hours.
+            </p>
+          </section>
+
+          <section id="billing" data-section="Plans and billing">
+            <h2>Plans and billing</h2>
+            <p>
+              The Starter plan is free for up to three members and one source.
+              Team costs €29 per editor per month, with unlimited viewers.
+              Enterprise adds SSO, audit logs and a dedicated success manager.
+            </p>
+            <p>
+              Invoices are issued on the first of the month. Downgrades take
+              effect at the end of the billing period; upgrades are prorated
+              immediately.
+            </p>
+          </section>
+        </main>
+
+        <aside class="help" aria-label="Ask Northwind AI" hidden>
+          <header class="help-header">
+            <div>
+              <h2 class="help-title">Ask Northwind AI</h2>
+              <p class="help-status">Online</p>
+            </div>
+            <button class="help-reset" type="button" title="Start over">
+              ↻
+            </button>
+            <button class="help-close" type="button" aria-label="Close">
+              ×
+            </button>
+          </header>
+          <p class="help-context"></p>
+          <ol class="help-messages" aria-live="polite"></ol>
+          <div class="help-suggestions"></div>
+          <form class="help-composer">
+            <textarea rows="1" placeholder="Ask about this page…"></textarea>
+            <button type="submit" aria-label="Send">↑</button>
+          </form>
+        </aside>
+      </div>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typewise Chat SDK examples</title>
+    <meta
+      name="description"
+      content="Live examples of custom chat experiences built with the headless Typewise Chat SDK."
+    />
+    <style>
+      :root {
+        --brand: #3c61e2;
+        --ink: #14161a;
+        --muted: #5f6672;
+        --line: #e4e7ec;
+        font-family:
+          'Inter',
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        color: var(--ink);
+        background: #f8f9fb;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 64px 24px 96px;
+      }
+      header p {
+        max-width: 640px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 40px;
+        letter-spacing: -0.02em;
+      }
+      code {
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: #eef1f6;
+        font-size: 0.9em;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 24px 0 40px;
+      }
+      .links a {
+        padding: 9px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font-weight: 550;
+        text-decoration: none;
+      }
+      .links a:first-child {
+        border-color: var(--brand);
+        background: var(--brand);
+        color: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        color: inherit;
+        text-decoration: none;
+        transition:
+          border-color 0.15s,
+          transform 0.15s;
+      }
+      .card:hover {
+        border-color: var(--brand);
+        transform: translateY(-2px);
+      }
+      .card h2 {
+        margin: 0;
+        font-size: 19px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: auto;
+        padding-top: 8px;
+      }
+      .tags span {
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: #eef1f6;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 550;
+      }
+      .connect {
+        margin-top: 48px;
+        padding: 20px 24px;
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .connect form {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .connect input {
+        flex: 1;
+        max-width: 420px;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font: inherit;
+      }
+      .connect button {
+        padding: 9px 14px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Typewise Chat SDK examples</h1>
+      <p>
+        <code>@typewise/chat-sdk</code> gives you Typewise AI conversations
+        without a UI: sessions, real-time replies, human handoff, attachments
+        and more. These demos show chat experiences a bubble widget can’t offer.
+      </p>
+      <div class="links">
+        <a href="https://docs.typewise.app/guides/channels/chat-sdk"
+          >Read the guide</a
+        >
+        <a href="https://www.npmjs.com/package/@typewise/chat-sdk"
+          >npm package</a
+        >
+        <a href="https://github.com/Typewise/chat-sdk-examples"
+          >Source on GitHub</a
+        >
+      </div>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="./storefront-concierge/">
+        <h2>Storefront concierge</h2>
+        <p>
+          The conversation lives in the product’s buy column and knows the
+          selected finish and quantity. ⌘K opens the same conversation as a
+          command palette.
+        </p>
+        <div class="tags">
+          <span>React</span><span>assistant-ui</span><span>setVariables</span>
+        </div>
+      </a>
+      <a class="card" href="./sidebar/">
+        <h2>Docs sidebar</h2>
+        <p>
+          A docked help panel on a documentation page. As you scroll, it tells
+          the assistant which section you are reading and suggests questions for
+          it.
+        </p>
+        <div class="tags">
+          <span>Vanilla TypeScript</span><span>No framework</span>
+        </div>
+      </a>
+      <a class="card" href="./proactive-prompts/">
+        <h2>Proactive prompts</h2>
+        <p>
+          A checkout that offers help at the right moment: hesitating on
+          delivery, scrolling to the FAQ, idling with a full cart, or heading
+          for the exit.
+        </p>
+        <div class="tags">
+          <span>React</span><span>useSyncExternalStore</span><span>track</span>
+        </div>
+      </a>
+      <a class="card" href="./script-tag/">
+        <h2>Script tag</h2>
+        <p>
+          One HTML file that loads the SDK from the Typewise CDN and renders a
+          chat with plain DOM code. No bundler, no build step.
+        </p>
+        <div class="tags"><span>HTML</span><span>CDN</span></div>
+      </a>
+    </main>
+
+    <section class="connect">
+      <strong>Use your own AI agent.</strong> The demos use a Typewise demo
+      client by default. Paste your client ID (the <code>clientId</code> in the
+      Quick start snippet under Channels → Chat → Installation in the Typewise
+      platform) to try them with your own configuration. It is stored in this
+      browser only and shared by every demo on this site.
+      <form id="connect">
+        <input name="clientId" placeholder="Your Typewise client ID" />
+        <button type="submit">Save</button>
+      </form>
+    </section>
+
+    <script>
+      const SETTINGS_KEY = 'tw-chat-sdk-examples:settings';
+      const form = document.getElementById('connect');
+      const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      form.clientId.value = saved.clientId || '';
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const clientId = form.clientId.value.trim();
+        const next = { ...saved, clientId };
+        if (clientId) localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));
+        else localStorage.removeItem(SETTINGS_KEY);
+        form.querySelector('button').textContent = 'Saved';
+      });
+    </script>
+  </body>
+</html>
