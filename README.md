@@ -10,7 +10,7 @@ Live demos of custom chat experiences built with [`@typewise/chat-sdk`](https://
 | [Storefront concierge](examples/storefront-concierge/) | The conversation lives in a product page's buy column, knows the selected finish and quantity, and opens as a ⌘K command palette from search. | React, assistant-ui           |
 | [Docs sidebar](examples/sidebar/)                      | A docked help panel that tells the assistant which docs section the reader is on and suggests questions for it.                               | TypeScript, no framework      |
 | [Proactive prompts](examples/proactive-prompts/)       | A checkout that offers help on dwell time, scroll depth, exit intent and an idle cart, then starts the conversation with the cart as context. | React, `useSyncExternalStore` |
-| [Script tag](examples/script-tag/)                     | One HTML file that loads the SDK from the Typewise CDN. No bundler.                                                                           | HTML                          |
+| [Script tag](examples/script-tag/)                     | One HTML file that loads the SDK from a CDN. No bundler.                                                                                      | HTML                          |
 
 ## Run locally
 
@@ -54,7 +54,7 @@ https://*.ably.io wss://*.ably.io
 https://*.amazonaws.com
 ```
 
-The script-tag example also needs `https://platform.typewise.app` in `script-src`.
+The script-tag example also needs `https://cdn.jsdelivr.net` in `script-src` (or `https://platform.typewise.app` if you load the platform's copy).
 
 ## License
 

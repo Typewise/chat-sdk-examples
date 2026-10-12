@@ -106,8 +106,8 @@
   <body>
     <h1>Script tag, no build step</h1>
     <p class="lead">
-      This page loads <code>typewise.global.js</code> from the Typewise CDN and
-      renders a chat with plain DOM code. View the source: it is one file.
+      This page loads <code>typewise.global.js</code> from jsDelivr and renders
+      a chat with plain DOM code. View the source: it is one file.
     </p>
 
     <form id="connect">
@@ -124,7 +124,9 @@
       </form>
     </section>
 
-    <script src="https://platform.typewise.app/client-sdk/typewise.global.js"></script>
+    <!-- @0 follows the latest 0.x release. Pin an exact version (@0.1.0) in production,
+         or load the platform's copy: https://platform.typewise.app/client-sdk/typewise.global.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@typewise/chat-sdk@0/dist/typewise.global.js"></script>
     <script>
       // Shared with the other examples on this site, so you only enter it once.
       const SETTINGS_KEY = 'tw-chat-sdk-examples:settings';
